@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    <array name="brand_names">
+        <item>Android</item>
+        <item>GitHub</item>
+    </array>
+    <array name="brand_logos">
+        <item>@drawable/android</item>
+        <item>@drawable/github</item>
+    </array>
+</resources>

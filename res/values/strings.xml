@@ -1,0 +1,12 @@
+<resources>
+
+    <string name="app_name">Guess Logo</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_main">Guess Logo</string>
+    <string name="success">Success!</string>
+    <string name="next">Next ></string>
+    <string name="logoDescription">Logo</string>
+    <string name="hintText">Guess The Brand</string>
+
+</resources>
