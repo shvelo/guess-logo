@@ -7,6 +7,8 @@ import java.util.Random;
 import android.os.Bundle;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.text.Editable;
@@ -14,6 +16,7 @@ import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
 
 public class MainActivity extends Activity {
@@ -25,6 +28,7 @@ public class MainActivity extends Activity {
 	public EditText guessField;
 	public TextView successText;
 	public Button nextButton;
+	public Button restartButton;
 	public TypedArray brand_names;
 	public TypedArray brand_logos;
 	public Random rand;
@@ -41,6 +45,7 @@ public class MainActivity extends Activity {
         guessField =  (EditText) findViewById(R.id.guessField);
         successText = (TextView) findViewById(R.id.successText);
         nextButton = (Button)findViewById(R.id.nextButton);
+        restartButton = (Button)findViewById(R.id.restartButton);
         brand_names = res.obtainTypedArray(R.array.brand_names);
         brand_logos = res.obtainTypedArray(R.array.brand_logos);
         brands = new ArrayList<Brand>();
@@ -69,6 +74,12 @@ public class MainActivity extends Activity {
 			}
 		});
         
+        restartButton.setOnClickListener(new OnClickListener(){
+			public void onClick(View v) {
+				restart();
+			}
+		});
+        
         startGuessing();
     }
     
@@ -82,21 +93,41 @@ public class MainActivity extends Activity {
         guessField.setText("");
         successText.setVisibility(View.INVISIBLE);
         nextButton.setVisibility(View.INVISIBLE);
-        
+
+    	guessField.setEnabled(true);
+    	showKeyboard();
     }
     
     public void guessed() {
+    	hideKeyboard();
+    	guessField.setEnabled(false);
     	successText.setVisibility(View.VISIBLE);
     	
     	if(brands.size() > 1) {
-    		brands.remove(brandIndex);        	
+    		brands.remove(brandIndex);
     		nextButton.setVisibility(View.VISIBLE);
+    	} else {
+    		restartButton.setVisibility(View.VISIBLE);
     	}
     }
+    
+    public void restart() {
+    	Intent intent = getIntent();
+    	finish();
+    	startActivity(intent);
+    }
+    
+    public void showKeyboard(){
+    	((InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE)).toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
+    }
+    
+    public void hideKeyboard(){
+    	((InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(guessField.getWindowToken(), 0);
+    }
 
-    @Override
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_main, menu);
         return true;
-    }
+    }*/
 }

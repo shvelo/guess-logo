@@ -8,5 +8,6 @@
     <string name="next">Next ></string>
     <string name="logoDescription">Logo</string>
     <string name="hintText">Guess The Brand</string>
+    <string name="restart">Restart</string>
 
 </resources>

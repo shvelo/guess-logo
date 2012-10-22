@@ -24,8 +24,9 @@ public final class R {
         public static final int LinearLayout1=0x7f080000;
         public static final int guessField=0x7f080002;
         public static final int logoImage=0x7f080001;
-        public static final int menu_settings=0x7f080005;
+        public static final int menu_settings=0x7f080006;
         public static final int nextButton=0x7f080004;
+        public static final int restartButton=0x7f080005;
         public static final int successText=0x7f080003;
     }
     public static final class layout {
@@ -41,6 +42,7 @@ public final class R {
         public static final int logoDescription=0x7f050006;
         public static final int menu_settings=0x7f050002;
         public static final int next=0x7f050005;
+        public static final int restart=0x7f050008;
         public static final int success=0x7f050004;
         public static final int title_activity_main=0x7f050003;
     }

@@ -17,13 +17,14 @@
         android:maxWidth="40dp"
         android:scaleType="fitXY"
         android:src="@android:drawable/sym_def_app_icon" />
-
+
     <EditText
         android:id="@+id/guessField"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:ems="10"
+        android:gravity="center"
         android:hint="@string/hintText"
         android:inputType="text" >
 
@@ -47,6 +48,14 @@
         android:layout_gravity="center"
         android:layout_marginTop="26dp"
         android:text="@string/next"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/restartButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/restart"
         android:visibility="invisible" />
 
 </LinearLayout>
