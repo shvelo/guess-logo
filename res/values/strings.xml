@@ -9,5 +9,8 @@
     <string name="logoDescription">Logo</string>
     <string name="hintText">Guess The Brand</string>
     <string name="restart">Restart</string>
+    <string name="all_logos_guessed">All Logos Guessed!</string>
+    <string name="title_activity_logo_list">Logos</string>
+    <string name="back">&lt; Back</string>
 
 </resources>
