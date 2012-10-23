@@ -42,7 +42,10 @@ public View getView(int position, View convertView, ViewGroup parent)
 
 		public void onClick(View v) {
 			GridView parent = (GridView)v.getParent();
-			int position = parent.pointToPosition((int)v.getX(), (int)v.getY());
+			int[] location = new int[] {0,0};
+			v.getLocationInWindow(location);
+			int position = parent.pointToPosition(location[0],location[1]);
+			
 			BrandManager.showGuessingScreen(position);
 		}});
  }
