@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<brands>
+    <brand>
+        <name>Android</name>
+        <logo>@drawable/android</logo>
+    </brand>
+    <brand>
+        <name>GitHub</name>
+        <logo>@drawable/github</logo>
+    </brand>
+</brands>

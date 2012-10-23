@@ -9,8 +9,8 @@ package com.shvelo.guesslogo;
 
 public final class R {
     public static final class array {
-        public static final int brand_logos=0x7f040001;
-        public static final int brand_names=0x7f040000;
+        public static final int brand_logos=0x7f050001;
+        public static final int brand_names=0x7f050000;
     }
     public static final class attr {
     }
@@ -21,32 +21,35 @@ public final class R {
         public static final int ic_launcher=0x7f020003;
     }
     public static final class id {
-        public static final int LinearLayout1=0x7f080000;
-        public static final int guessField=0x7f080002;
-        public static final int logoImage=0x7f080001;
-        public static final int menu_settings=0x7f080006;
-        public static final int nextButton=0x7f080004;
-        public static final int restartButton=0x7f080005;
-        public static final int successText=0x7f080003;
+        public static final int LinearLayout1=0x7f090000;
+        public static final int guessField=0x7f090002;
+        public static final int logoImage=0x7f090001;
+        public static final int menu_settings=0x7f090006;
+        public static final int nextButton=0x7f090004;
+        public static final int restartButton=0x7f090005;
+        public static final int successText=0x7f090003;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
     }
     public static final class menu {
-        public static final int activity_main=0x7f070000;
+        public static final int activity_main=0x7f080000;
     }
     public static final class string {
-        public static final int app_name=0x7f050000;
-        public static final int hello_world=0x7f050001;
-        public static final int hintText=0x7f050007;
-        public static final int logoDescription=0x7f050006;
-        public static final int menu_settings=0x7f050002;
-        public static final int next=0x7f050005;
-        public static final int restart=0x7f050008;
-        public static final int success=0x7f050004;
-        public static final int title_activity_main=0x7f050003;
+        public static final int app_name=0x7f060000;
+        public static final int hello_world=0x7f060001;
+        public static final int hintText=0x7f060007;
+        public static final int logoDescription=0x7f060006;
+        public static final int menu_settings=0x7f060002;
+        public static final int next=0x7f060005;
+        public static final int restart=0x7f060008;
+        public static final int success=0x7f060004;
+        public static final int title_activity_main=0x7f060003;
     }
     public static final class style {
-        public static final int AppTheme=0x7f060000;
+        public static final int AppTheme=0x7f070000;
+    }
+    public static final class xml {
+        public static final int brands=0x7f040000;
     }
 }

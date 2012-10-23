@@ -1,8 +1,12 @@
 package com.shvelo.guesslogo;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
 
 import android.os.Bundle;
 
@@ -13,7 +17,6 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
@@ -50,6 +53,27 @@ public class MainActivity extends Activity {
         brand_logos = res.obtainTypedArray(R.array.brand_logos);
         brands = new ArrayList<Brand>();
         rand = new Random();
+        
+        XmlPullParser parser = res.getXml(R.xml.brands);
+        try {
+			parser.nextTag();
+			parser.require(XmlPullParser.START_TAG, null, "brands");
+			while (parser.next() != XmlPullParser.END_TAG) {
+		        if (parser.getEventType() != XmlPullParser.START_TAG) {
+		            continue;
+		        }
+		        String name = parser.getName();
+		        // Starts by looking for the entry tag
+		        if (name.equals("entry")) {
+		            entries.add(readEntry(parser));
+		        } else {
+		            skip(parser);
+		        }
+		    }
+		} catch (XmlPullParserException e) {
+		} catch (IOException e) {
+		}
+        
         
         for(int i = 0; i < brand_names.length(); i++) {
         	brands.add(new Brand(brand_names.getString(i), brand_logos.getDrawable(i)));
@@ -118,7 +142,8 @@ public class MainActivity extends Activity {
     }
     
     public void showKeyboard(){
-    	((InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE)).toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
+    	//((InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE)).toggleSoftInput(InputMethodManager.SHOW_IMPLICIT,InputMethodManager.SHOW_IMPLICIT );
+    	((InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE)).showSoftInput(guessField, InputMethodManager.SHOW_IMPLICIT);
     }
     
     public void hideKeyboard(){
