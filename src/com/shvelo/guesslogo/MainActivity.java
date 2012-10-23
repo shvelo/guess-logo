@@ -2,13 +2,17 @@ package com.shvelo.guesslogo;
 
 import android.os.Bundle;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
@@ -91,6 +95,7 @@ public class MainActivity extends Activity {
         nextButton.setVisibility(View.INVISIBLE);
 
         if(BrandManager.isGuessed(brandIndex)) {
+        	guessField.setText(brand.name);
         	guessed();
         } else {
         	guessField.setEnabled(true);
@@ -143,9 +148,43 @@ public class MainActivity extends Activity {
     	((InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(guessField.getWindowToken(), 0);
     }
 
-    /*@Override
+	@Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_main, menu);
+        getMenuInflater().inflate(R.menu.global, menu);
+        
+        MenuItem menuRestart = menu.findItem(R.id.menuRestart);
+        
+        menuRestart.setOnMenuItemClickListener(new OnMenuItemClickListener(){
+			public boolean onMenuItemClick(MenuItem item) {
+				BrandManager.restart();
+				return false;
+			}
+        });
+                
+        if(android.os.Build.VERSION.SDK_INT > 10) {
+            getActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+        
+        MenuItem menuGuessed = menu.findItem(R.id.menuGuessed);
+        
+        int total = BrandManager.size();
+        int totalGuessed = total - BrandManager.unguessed.size();
+        
+        menuGuessed.setTitle("Guessed "+String.valueOf(totalGuessed) + "/" + String.valueOf(total));
+        
         return true;
-    }*/
+    }
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    switch (item.getItemId()) {
+	        case android.R.id.home:
+	            Intent intent = new Intent(this, LogoList.class);
+	            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+	            startActivity(intent);
+	            return true;
+	        default:
+	            return super.onOptionsItemSelected(item);
+	    }
+	}
 }

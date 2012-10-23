@@ -3,6 +3,9 @@ package com.shvelo.guesslogo;
 import android.os.Bundle;
 
 import android.app.Activity;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.MenuItem.OnMenuItemClickListener;
 import android.widget.GridView;
 
 public class LogoList extends Activity {
@@ -22,9 +25,26 @@ public class LogoList extends Activity {
         grid.setAdapter(adapter);
     }
 
-    /*@Override
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_logo_list, menu);
+        getMenuInflater().inflate(R.menu.global, menu);
+        
+        MenuItem menuRestart = menu.findItem(R.id.menuRestart);
+        
+        menuRestart.setOnMenuItemClickListener(new OnMenuItemClickListener(){
+			public boolean onMenuItemClick(MenuItem item) {
+				BrandManager.restart();
+				return false;
+			}
+        });
+        
+        MenuItem menuGuessed = menu.findItem(R.id.menuGuessed);
+        
+        int total = BrandManager.size();
+        int totalGuessed = total - BrandManager.unguessed.size();
+        
+        menuGuessed.setTitle("Guessed "+String.valueOf(totalGuessed) + "/" + String.valueOf(total));
+        
         return true;
-    }*/
+    }
 }

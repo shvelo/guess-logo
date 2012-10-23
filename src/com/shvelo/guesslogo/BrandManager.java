@@ -11,6 +11,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
+import android.util.Log;
 
 public class BrandManager {
 	public static Context context;
@@ -24,7 +25,7 @@ public class BrandManager {
 		context = con;
 		activity = act;
 		Resources res = context.getResources();
-		settings = activity.getSharedPreferences("brands_config", 0);
+		settings = activity.getPreferences(0) ;
 		TypedArray brand_names = res.obtainTypedArray(R.array.brand_names);
 		TypedArray brand_logos = res.obtainTypedArray(R.array.brand_logos);
         brands = new ArrayList<Brand>();
@@ -43,25 +44,30 @@ public class BrandManager {
             	unguessed.add(i);
             }
         	
-        	String serializedString = "";
-        	for(int i = 0; i < unguessed.size(); i++) {
-        		if(i == unguessed.size() - 1) {
-        			serializedString += unguessed.get(i).toString();
-        		} else {
-        			serializedString += unguessed.get(i).toString() + "|";
-        		}
-        	}
-        	
-        	Editor settingsEditor = settings.edit();
-        	settingsEditor.putString("unguessed", serializedString);
-        	settingsEditor.commit();
-        } else {
+        	saveUnguessed();
+        } else if( savedValue.length() > 0){
+        	Log.i("saved string","Value: "+savedValue);
         	String[] savedList = savedValue.split("\\|");
         	
         	for(int i = 0; i < savedList.length; i++) {
         		unguessed.add(Integer.valueOf(savedList[i]));
         	}
         }
+	}
+	
+	public static void saveUnguessed() {
+		String serializedString = "";
+    	for(int i = 0; i < unguessed.size(); i++) {
+    		if(i == unguessed.size() - 1) {
+    			serializedString += unguessed.get(i).toString();
+    		} else {
+    			serializedString += unguessed.get(i).toString() + "|";
+    		}
+    	}
+    	
+    	Editor settingsEditor = settings.edit();
+    	settingsEditor.putString("unguessed", serializedString);
+    	settingsEditor.commit();
 	}
 	
 	public static Brand get(int id) {
@@ -106,6 +112,7 @@ public class BrandManager {
 	
 	public static void guessed(int id) {
 		unguessed.remove(Integer.valueOf(id));
+		saveUnguessed();
 	}
 	
 	public static int size() {
