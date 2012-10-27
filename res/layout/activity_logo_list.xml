@@ -5,12 +5,18 @@
     android:layout_alignParentLeft="true"
     android:layout_alignParentTop="true"
     android:orientation="vertical">
-
+
     <GridView
         android:id="@+id/logo_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:numColumns="3" >
+        android:columnWidth="100dp"
+        android:gravity="center"
+        android:horizontalSpacing="10dp"
+        android:numColumns="auto_fit"
+        android:padding="10dp"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="10dp" >
 
     </GridView>
 

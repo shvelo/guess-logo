@@ -1,5 +1,6 @@
 package com.shvelo.guesslogo;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -11,6 +12,9 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 
 public class BrandManager {
@@ -20,6 +24,7 @@ public class BrandManager {
 	public static List<Integer> unguessed;
 	public static Random rand;
 	public static SharedPreferences settings;
+	public static SQLiteDatabase db;
 	
 	public static void init(Context con, Activity act) {
 		context = con;
@@ -32,8 +37,35 @@ public class BrandManager {
         unguessed = new ArrayList<Integer>();
         rand = new Random();
         
-        for(int i = 0; i < brand_names.length(); i++) {
-        	Brand b = new Brand(brand_names.getString(i), brand_logos.getDrawable(i));
+        DBHelper dbHelper = new DBHelper(context);
+        try {
+			dbHelper.create();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+        dbHelper.open();
+        
+        db = dbHelper.get();
+        
+        Cursor query = db.query("brands", null, null, null, null, null, null, null);
+        
+        for(int i = 0; i < query.getCount(); i++) {
+        	query.moveToNext();
+        	
+        	int imageResource = context.getResources().getIdentifier(query.getString(1), null, context.getPackageName());
+        	
+        	List<String> variants = new ArrayList<String>();
+        	variants.add(query.getString(2));
+        	variants.add(query.getString(3));
+        	variants.add(query.getString(4));
+        	variants.add(query.getString(5));
+        	
+        	Brand b = new Brand(
+        			query.getString(0),
+        			context.getResources().getDrawable(imageResource),
+        			variants,
+        			query.getInt(6)
+        	);
         	brands.add(b);
         }
         

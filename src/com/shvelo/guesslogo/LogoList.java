@@ -6,6 +6,8 @@ import android.app.Activity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
 
 public class LogoList extends Activity {
@@ -23,6 +25,18 @@ public class LogoList extends Activity {
         
         GridView grid = (GridView)findViewById(R.id.logo_list);
         grid.setAdapter(adapter);
+        grid.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,	long arg3) {
+				BrandManager.showGuessingScreen(arg2);
+			}
+        	
+        });
+    }
+    
+    @Override
+    public void onResume() {
+    	adapter.notifyDataSetChanged();
     }
 
     @Override

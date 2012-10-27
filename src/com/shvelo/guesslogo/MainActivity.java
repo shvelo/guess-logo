@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,12 +23,13 @@ public class MainActivity extends Activity {
 	public int brandIndex;
 	public Brand brand;
 	public ImageView logoImage;
-	public EditText guessField;
-	public TextView successText;
-	public Button backButton;
-	public Button nextButton;
-	public Button restartButton;
 	public Resources res;
+	public Button variant1;
+	public Button variant2;
+	public Button variant3;
+	public Button variant4;
+	public TextView brandName;
+	public View variants;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -36,49 +38,52 @@ public class MainActivity extends Activity {
         
         res = getResources();
         logoImage = (ImageView)findViewById(R.id.logoImage);
-        guessField =  (EditText) findViewById(R.id.guessField);
-        successText = (TextView) findViewById(R.id.successText);
-        backButton = (Button)findViewById(R.id.backButton);
-        nextButton = (Button)findViewById(R.id.nextButton);
-        restartButton = (Button)findViewById(R.id.restartButton);
         
-        successText.setText(R.string.success);
+        variant1 = (Button)findViewById(R.id.variant1);
+        variant2 = (Button)findViewById(R.id.variant2);
+        variant3 = (Button)findViewById(R.id.variant3);
+        variant4 = (Button)findViewById(R.id.variant4);
+        brandName = (TextView)findViewById(R.id.brandName);
+        variants = findViewById(R.id.variants);
         
-        guessField.addTextChangedListener(new TextWatcher() {
-            public void afterTextChanged(Editable s) {
-              
-            	String guess = s.toString();
-            	if(guess.toLowerCase().contentEquals(brand.name.toLowerCase())) {
-            		guessed();
-            	}
-              
-            }
-			public void beforeTextChanged(CharSequence s, int start, int count,	int after) {}
-			public void onTextChanged(CharSequence s, int start, int before, int count) {}
-         });
-        
-        backButton.setOnClickListener(new OnClickListener(){
+        variant1.setOnClickListener(new OnClickListener(){
 			public void onClick(View v) {
-				BrandManager.showLogoList();
+				if(brand.correct == 1) {
+					guessed();
+					Log.v("guess","correct");
+				}
 			}
 		});
         
-        nextButton.setOnClickListener(new OnClickListener(){
+        variant2.setOnClickListener(new OnClickListener(){
 			public void onClick(View v) {
-				startGuessing();
+				if(brand.correct == 2) {
+					guessed();
+					Log.v("guess","correct");
+				}
 			}
 		});
         
-        restartButton.setOnClickListener(new OnClickListener(){
+        variant3.setOnClickListener(new OnClickListener(){
 			public void onClick(View v) {
-				restart();
+				if(brand.correct == 3) {
+					guessed();
+					Log.v("guess","correct");
+				}
+			}
+		});
+        
+        variant4.setOnClickListener(new OnClickListener(){
+			public void onClick(View v) {
+				if(brand.correct == 4) {
+					guessed();
+					Log.v("guess","correct");
+				}
 			}
 		});
         
         int intentBrand = getIntent().getIntExtra("brand", -1);
-        if(intentBrand == -1) {
-        	startGuessing();
-        } else {
+        if(intentBrand != -1) {
         	startGuessing(intentBrand);
         }
     }
@@ -90,64 +95,29 @@ public class MainActivity extends Activity {
         
         logoImage.setImageDrawable(brand.logo);
         
-        guessField.setText("");
-        successText.setVisibility(View.INVISIBLE);
-        nextButton.setVisibility(View.INVISIBLE);
-
-        if(BrandManager.isGuessed(brandIndex)) {
-        	guessField.setText(brand.name);
-        	guessed();
-        } else {
-        	guessField.setEnabled(true);
-        	showKeyboard();
-        }
-    }
-    
-    public void startGuessing() {
-    	
-    	brandIndex = BrandManager.randomIndex();
-        brand = new Brand(BrandManager.get(brandIndex));
-        
-        logoImage.setImageDrawable(brand.logo);
-        
-        guessField.setText("");
-        successText.setVisibility(View.INVISIBLE);
-        nextButton.setVisibility(View.INVISIBLE);
+        variant1.setText(brand.getVariant(1));
+        variant2.setText(brand.getVariant(2));
+        variant3.setText(brand.getVariant(3));
+        variant4.setText(brand.getVariant(4));
+        brandName.setText(brand.name);
         
         if(BrandManager.isGuessed(brandIndex)) {
         	guessed();
         } else {
-        	guessField.setEnabled(true);
-        	showKeyboard();
+        	
         }
     }
     
     public void guessed() {
-    	hideKeyboard();
     	BrandManager.guessed(brandIndex);
-    	guessField.setEnabled(false);
-    	successText.setVisibility(View.VISIBLE);
-    	
-    	if(BrandManager.allGuessed()) {
-    		successText.setText(R.string.all_logos_guessed);
-    		restartButton.setVisibility(View.VISIBLE);
-    	} else {
-    		nextButton.setVisibility(View.VISIBLE);
-    	}
+    	brandName.setVisibility(View.VISIBLE);
+    	variants.setVisibility(View.GONE);
     }
     
     public void restart() {
     	BrandManager.restart();
     }
     
-    public void showKeyboard(){
-    	((InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE)).toggleSoftInput(InputMethodManager.SHOW_IMPLICIT,InputMethodManager.HIDE_IMPLICIT_ONLY );
-    }
-    
-    public void hideKeyboard(){
-    	((InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(guessField.getWindowToken(), 0);
-    }
-
 	@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.global, menu);

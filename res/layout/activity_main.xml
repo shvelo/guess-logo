@@ -3,6 +3,7 @@
     android:id="@+id/LinearLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="center"
     android:orientation="vertical" >
 
     <ImageView
@@ -17,64 +18,60 @@
         android:maxWidth="40dp"
         android:scaleType="fitCenter"
         android:src="@android:drawable/sym_def_app_icon" />
-
-    <EditText
-        android:id="@+id/guessField"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:ems="10"
-        android:gravity="center"
-        android:inputType="text"
-        android:textSize="20dp" >
-
-        <requestFocus />
-    </EditText>
-
-    <TextView
-        android:id="@+id/successText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="36dp"
-        android:text="@string/success"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="20dp"
-        android:visibility="invisible" />
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center" >
-
-        <Button
-            android:id="@+id/backButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:text="@string/back"
-            android:textSize="25dp" />
-
-        <Button
-            android:id="@+id/nextButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_marginTop="26dp"
-            android:layout_weight="1"
-            android:text="@string/next"
-            android:textSize="25dp"
-            android:visibility="invisible" />
-
-    </LinearLayout>
 
-    <Button
-        android:id="@+id/restartButton"
+    <LinearLayout
+        android:id="@+id/variants"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp" >
+
+            <Button
+                android:id="@+id/variant3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Button" />
+
+            <Button
+                android:id="@+id/variant4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="Button" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" >
+
+            <Button
+                android:id="@+id/variant1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Button" />
+
+            <Button
+                android:id="@+id/variant2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="Button" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/brandName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="@string/restart"
-        android:textSize="25dp"
-        android:visibility="invisible" />
+        android:text="Large Text"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:visibility="gone" />
 
 </LinearLayout>

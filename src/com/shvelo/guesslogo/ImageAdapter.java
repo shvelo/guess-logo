@@ -33,21 +33,11 @@ public View getView(int position, View convertView, ViewGroup parent)
     LayoutInflater li = (LayoutInflater) context.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
     v = li.inflate(R.layout.grid_item, null);
    
-    ImageView iv = (ImageView)v.findViewById(R.id.grid_item_image);
+    ImageView iv = (ImageView)v.findViewById(R.id.grid_item);
     iv.setImageDrawable(BrandManager.get(position).logo);
     if(BrandManager.isGuessed(position)){
     	v.setBackgroundColor(Color.GREEN);
     }
-    v.setOnClickListener(new OnClickListener(){
-
-		public void onClick(View v) {
-			GridView parent = (GridView)v.getParent();
-			int[] location = new int[] {0,0};
-			v.getLocationInWindow(location);
-			int position = parent.pointToPosition(location[0],location[1]);
-			
-			BrandManager.showGuessingScreen(position);
-		}});
  }
 
  return v;

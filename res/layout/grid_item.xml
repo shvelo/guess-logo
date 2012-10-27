@@ -1,18 +1,9 @@
 <?xml version="1.0"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ImageView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/grid_item"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="center" >
-
-<ImageView
-    android:id="@+id/grid_item_image"
-    android:layout_width="100dp"
-    android:layout_height="100dp"
-    android:layout_gravity="center"
-    android:layout_margin="5dp"
-    android:scaleType="fitStart" >
+    android:padding="10dp"
+    android:scaleType="fitCenter" >
 
     </ImageView>
-
-</LinearLayout>
