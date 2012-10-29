@@ -31,7 +31,7 @@ public class BrandManager {
         
         db = dbHelper.get();
         
-        Cursor query = db.query("brands", null, null, null, null, null, null, null);
+        Cursor query = db.query("brands", null, null, null, null, null, "name asc", null);
         
         for(int i = 0; i < query.getCount(); i++) {
         	query.moveToNext();

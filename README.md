@@ -1,4 +1,4 @@
 # Guess Logo
 
 Android app   
-Currently compiled for Android 4.0+
+Works on Android 2.3+
