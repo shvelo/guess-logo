@@ -4,51 +4,47 @@ import android.content.Context;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.GridView;
 import android.widget.ImageView;
 
-public class ImageAdapter extends BaseAdapter
-{
-Context context;
+public class ImageAdapter extends BaseAdapter {
+	Context context;
 
-public ImageAdapter(Context context)
-{
- this.context = context;
-}
+	public ImageAdapter(Context context) {
+		this.context = context;
+	}
 
-public int getCount() 
-{
- return BrandManager.size();
-}
+	public int getCount() {
+		return BrandManager.size();
+	}
 
-public View getView(int position, View convertView, ViewGroup parent) 
-{
- View v = convertView;
+	public View getView(int position, View convertView, ViewGroup parent) {
+		View v = convertView;
+		
+		Brand item = (Brand)getItem(position);
+		
+		if (convertView == null) {
+			LayoutInflater li = (LayoutInflater) context
+					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			v = li.inflate(R.layout.grid_item, null);
 
- if ( convertView == null )
- {
-    LayoutInflater li = (LayoutInflater) context.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
-    v = li.inflate(R.layout.grid_item, null);
-    
-    ImageView iv = (ImageView)v.findViewById(R.id.grid_item);
-    iv.setImageDrawable(BrandManager.get(position).logo);
- }
- 
- if(BrandManager.get(position).guessed){
- 	v.setBackgroundColor(Color.GRAY);
- }
+			ImageView iv = (ImageView) v.findViewById(R.id.grid_item);
+			iv.setImageDrawable(item.logo);
+		}
 
- return v;
-}
+		if (item.guessed) {
+			v.setBackgroundColor(Color.GRAY);
+		}
 
-public Object getItem(int arg0) {
- return null;
-}
+		return v;
+	}
 
-public long getItemId(int arg0) {
- return 0;
-}
+	public Object getItem(int position) {
+		return BrandManager.get(position);
+	}
+
+	public long getItemId(int arg0) {
+		return (long) arg0;
+	}
 }
