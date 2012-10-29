@@ -225,13 +225,15 @@ containing a value of this type.
         public static final int ic_action_refresh=0x7f020002;
         public static final int ic_action_search=0x7f020003;
         public static final int ic_launcher=0x7f020004;
+        public static final int nintendo=0x7f020005;
+        public static final int puma=0x7f020006;
     }
     public static final class id {
         public static final int LinearLayout1=0x7f040013;
         public static final int alignBounds=0x7f040002;
         public static final int alignMargins=0x7f040003;
-        public static final int backButton=0x7f040017;
         public static final int bottom=0x7f040005;
+        public static final int brandName=0x7f04001a;
         public static final int center=0x7f04000c;
         public static final int center_horizontal=0x7f04000a;
         public static final int center_vertical=0x7f040008;
@@ -241,21 +243,21 @@ containing a value of this type.
         public static final int fill=0x7f04000d;
         public static final int fill_horizontal=0x7f04000b;
         public static final int fill_vertical=0x7f040009;
-        public static final int grid_item=0x7f04001a;
-        public static final int grid_item_image=0x7f04001b;
-        public static final int guessField=0x7f040015;
+        public static final int grid_item=0x7f04001b;
         public static final int horizontal=0x7f040000;
         public static final int left=0x7f040006;
         public static final int logoImage=0x7f040014;
         public static final int logo_list=0x7f040012;
         public static final int menuGuessed=0x7f04001c;
         public static final int menuRestart=0x7f04001d;
-        public static final int nextButton=0x7f040018;
-        public static final int restartButton=0x7f040019;
         public static final int right=0x7f040007;
         public static final int start=0x7f040010;
-        public static final int successText=0x7f040016;
         public static final int top=0x7f040004;
+        public static final int variant1=0x7f040018;
+        public static final int variant2=0x7f040019;
+        public static final int variant3=0x7f040016;
+        public static final int variant4=0x7f040017;
+        public static final int variants=0x7f040015;
         public static final int vertical=0x7f040001;
     }
     public static final class layout {

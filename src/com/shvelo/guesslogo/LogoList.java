@@ -36,6 +36,7 @@ public class LogoList extends Activity {
     
     @Override
     public void onResume() {
+    	super.onResume();
     	adapter.notifyDataSetChanged();
     }
 

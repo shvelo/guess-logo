@@ -138,10 +138,6 @@ public class BrandManager {
     	}
 	}
 	
-	public static int randomIndex() {
-		return unguessed.get(rand.nextInt(unguessed.size()));
-	}
-	
 	public static void guessed(int id) {
 		unguessed.remove(Integer.valueOf(id));
 		saveUnguessed();
