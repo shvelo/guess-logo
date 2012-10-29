@@ -17,9 +17,9 @@ public class DBHelper extends SQLiteOpenHelper {
 
 	private static String DB_NAME = "brands.db";
 
-	private SQLiteDatabase myDataBase;
+	private SQLiteDatabase database;
 
-	private final Context myContext;
+	private final Context context;
 	
 	private static boolean FORCE_UPDATE = false;
 
@@ -32,7 +32,7 @@ public class DBHelper extends SQLiteOpenHelper {
 	public DBHelper(Context context) {
 
 		super(context, DB_NAME, null, 1);
-		this.myContext = context;
+		this.context = context;
 		
 		File dataDir = new File(context.getApplicationInfo().dataDir);
 		File DBDir =  new File(dataDir, "databases");
@@ -47,7 +47,7 @@ public class DBHelper extends SQLiteOpenHelper {
 	 * */
 	public void create() throws IOException {
 
-		boolean dbExist = checkDataBase();
+		boolean dbExist = check();
 
 		if (dbExist && !FORCE_UPDATE) {
 			// do nothing - database already exist
@@ -58,7 +58,7 @@ public class DBHelper extends SQLiteOpenHelper {
 			// database with our database.
 			this.getReadableDatabase();
 			try {
-				copyDataBase();
+				copy();
 			} catch (IOException e) {
 				throw new Error("Error copying database");
 			}
@@ -72,7 +72,7 @@ public class DBHelper extends SQLiteOpenHelper {
 	 * 
 	 * @return true if it exists, false if it doesn't
 	 */
-	private boolean checkDataBase() {
+	private boolean check() {
 		SQLiteDatabase checkDB = null;
 		try {
 			checkDB = SQLiteDatabase.openDatabase(DB_PATH, null,
@@ -86,49 +86,48 @@ public class DBHelper extends SQLiteOpenHelper {
 		return checkDB != null ? true : false;
 	}
 
-	/**
-	 * Copies your database from your local assets-folder to the just created
-	 * empty database in the system folder, from where it can be accessed and
-	 * handled. This is done by transfering bytestream.
-	 * */
-	private void copyDataBase() throws IOException {
+	private void copy() throws IOException {
+		InputStream myInput = context.getAssets().open(DB_NAME);
 
-		// Open your local db as the input stream
-		InputStream myInput = myContext.getAssets().open(DB_NAME);
-
-		// Open the empty db as the output stream
 		OutputStream myOutput = new FileOutputStream(DB_PATH);
 
-		// transfer bytes from the inputfile to the outputfile
 		byte[] buffer = new byte[1024];
 		int length;
 		while ((length = myInput.read(buffer)) > 0) {
 			myOutput.write(buffer, 0, length);
 		}
 
-		// Close the streams
 		myOutput.flush();
 		myOutput.close();
 		myInput.close();
-
 	}
-
+	
+	/**
+	 * Open the database for read/write
+	 * @throws SQLException
+	 */
 	public void open() throws SQLException {
-
-		// Open the database
-		myDataBase = SQLiteDatabase.openDatabase(DB_PATH, null,
-				SQLiteDatabase.OPEN_READWRITE);
-
+		database = SQLiteDatabase.openDatabase(DB_PATH, null, SQLiteDatabase.OPEN_READWRITE);
 	}
 
+	
+	/**
+	 * Close the database
+	 */
 	@Override
 	public synchronized void close() {
-
-		if (myDataBase != null)
-			myDataBase.close();
-
+		if (database != null)
+			database.close();
+		
 		super.close();
-
+	}
+	
+	/**
+	 * Get the database
+	 * @return SQLiteDatabase
+	 */
+	public SQLiteDatabase get() {
+		return database;
 	}
 
 	@Override
@@ -137,8 +136,5 @@ public class DBHelper extends SQLiteOpenHelper {
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {}
 	
-	public SQLiteDatabase get() {
-		return myDataBase;
-	}
 	
 }
