@@ -1,6 +1,5 @@
 package com.shvelo.guesslogo;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,12 +21,6 @@ public class BrandManager {
         brands = new ArrayList<Brand>();
         
         DBHelper dbHelper = new DBHelper(context);
-        try {
-			dbHelper.create();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-        dbHelper.open();
         
         db = dbHelper.get();
         

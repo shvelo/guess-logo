@@ -1,27 +1,37 @@
 package com.shvelo.guesslogo;
 
-import java.io.File;
-import java.io.FileOutputStream;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 import android.content.Context;
-import android.database.SQLException;
-import android.database.sqlite.*;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 
 public class DBHelper extends SQLiteOpenHelper {
-
-	// The Android's default system path of your application database.
-	private static String DB_PATH;
-
-	private static String DB_NAME = "brands.db";
 
 	private SQLiteDatabase database;
 
 	private final Context context;
+
+	private static final String DATABASE_NAME = "brands.db3";
+	private static final int DATABASE_VERSION = 1;
 	
-	private static boolean FORCE_UPDATE = false;
+	private static final String TABLE_CREATE = "CREATE TABLE brands("+
+			"_id INTEGER PRIMARY KEY,"+
+			"name TEXT,"+
+			"logo TEXT,"+
+			"variant1 TEXT,"+
+			"variant2 TEXT,"+
+			"variant3 TEXT,"+
+			"variant4 TEXT,"+
+			"correct INTEGER,"+
+			"guessed INTEGER"+
+	")";
 
 	/**
 	 * Constructor Takes and keeps a reference of the passed context in order to
@@ -31,85 +41,11 @@ public class DBHelper extends SQLiteOpenHelper {
 	 */
 	public DBHelper(Context context) {
 
-		super(context, DB_NAME, null, 1);
+		super(context, DATABASE_NAME, null, DATABASE_VERSION);
 		this.context = context;
 		
-		File dataDir = new File(context.getApplicationInfo().dataDir);
-		File DBDir =  new File(dataDir, "databases");
-		File DBFile = new File(DBDir, DB_NAME);
-		
-		DB_PATH = DBFile.getPath();
+		database = getReadableDatabase();
 	}
-
-	/**
-	 * Creates a empty database on the system and rewrites it with your own
-	 * database.
-	 * */
-	public void create() throws IOException {
-
-		boolean dbExist = check();
-
-		if (dbExist && !FORCE_UPDATE) {
-			// do nothing - database already exist
-		} else {
-			// By calling this method and empty database will be created into
-			// the default system path
-			// of your application so we are gonna be able to overwrite that
-			// database with our database.
-			this.getReadableDatabase();
-			try {
-				copy();
-			} catch (IOException e) {
-				throw new Error("Error copying database");
-			}
-		}
-
-	}
-
-	/**
-	 * Check if the database already exist to avoid re-copying the file each
-	 * time you open the application.
-	 * 
-	 * @return true if it exists, false if it doesn't
-	 */
-	private boolean check() {
-		SQLiteDatabase checkDB = null;
-		try {
-			checkDB = SQLiteDatabase.openDatabase(DB_PATH, null,
-					SQLiteDatabase.OPEN_READONLY);
-		} catch (SQLiteException e) {
-			// database does't exist yet.
-		}
-		if (checkDB != null) {
-			checkDB.close();
-		}
-		return checkDB != null ? true : false;
-	}
-
-	private void copy() throws IOException {
-		InputStream myInput = context.getAssets().open(DB_NAME);
-
-		OutputStream myOutput = new FileOutputStream(DB_PATH);
-
-		byte[] buffer = new byte[1024];
-		int length;
-		while ((length = myInput.read(buffer)) > 0) {
-			myOutput.write(buffer, 0, length);
-		}
-
-		myOutput.flush();
-		myOutput.close();
-		myInput.close();
-	}
-	
-	/**
-	 * Open the database for read/write
-	 * @throws SQLException
-	 */
-	public void open() throws SQLException {
-		database = SQLiteDatabase.openDatabase(DB_PATH, null, SQLiteDatabase.OPEN_READWRITE);
-	}
-
 	
 	/**
 	 * Close the database
@@ -131,10 +67,66 @@ public class DBHelper extends SQLiteOpenHelper {
 	}
 
 	@Override
-	public void onCreate(SQLiteDatabase db) {}
+	public void onCreate(SQLiteDatabase db) {
+		database = db;
+		database.execSQL(TABLE_CREATE);
+		loadDB();
+	}
 
 	@Override
-	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {}
+	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+		
+		List<Integer> guessed = new ArrayList<Integer>();
+		
+		Cursor query = db.query("brands", null, null, null, null, null, "name asc", null);
+		for(int i = 0; i < query.getCount(); i++) {
+        	query.moveToNext();
+        	if(query.getInt(query.getColumnIndex("guessed")) == 1)
+        		guessed.add(query.getInt(query.getColumnIndex("_id")));
+		}
+		
+		db.execSQL("DROP TABLE brands");
+		db.execSQL(TABLE_CREATE);
+		loadDB();
+		
+		db.beginTransaction();		
+		for(int i = 0; i < guessed.size(); i++) {
+			db.execSQL("UPDATE brands SET guessed=1 WHERE _id=?", new String[] {
+					guessed.get(i).toString()
+			});
+		}
+		db.setTransactionSuccessful();
+		db.endTransaction();
+	}
 	
+	private void loadDB() {
+		new Thread(new Runnable() {
+			public void run() {
+				try {
+					loadLogos();
+				} catch (IOException e) {
+					throw new RuntimeException(e);
+				}
+			}
+		}).start();
+	}
+
+	private void loadLogos() throws IOException {
+		InputStream inputStream = context.getAssets().open("brands.sql");
+		BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+
+		String line;
+		
+		database.beginTransaction();		
+		try {
+			while ((line = reader.readLine()) != null) {
+				database.execSQL(line);
+			}
+			database.setTransactionSuccessful();
+		} finally {
+			reader.close();
+			database.endTransaction();
+		}
+	}
 	
 }
