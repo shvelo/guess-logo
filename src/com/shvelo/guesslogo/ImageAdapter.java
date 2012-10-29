@@ -38,7 +38,7 @@ public View getView(int position, View convertView, ViewGroup parent)
  }
  
  if(BrandManager.get(position).guessed){
- 	v.setBackgroundColor(Color.GREEN);
+ 	v.setBackgroundColor(Color.GRAY);
  }
 
  return v;

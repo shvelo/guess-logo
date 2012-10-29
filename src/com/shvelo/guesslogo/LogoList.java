@@ -12,7 +12,8 @@ import android.widget.GridView;
 
 public class LogoList extends Activity {
 
-	ImageAdapter adapter;
+	public ImageAdapter adapter;
+	public MenuItem menuGuessed;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,12 @@ public class LogoList extends Activity {
     public void onResume() {
     	super.onResume();
     	adapter.notifyDataSetChanged();
+    	
+    	if(menuGuessed != null) {
+    		int total = BrandManager.size();
+            int totalGuessed = BrandManager.sizeGuessed();
+            menuGuessed.setTitle("Guessed "+String.valueOf(totalGuessed) + "/" + String.valueOf(total));
+    	}
     }
 
     @Override
@@ -53,7 +60,7 @@ public class LogoList extends Activity {
 			}
         });
         
-        MenuItem menuGuessed = menu.findItem(R.id.menuGuessed);
+        menuGuessed = menu.findItem(R.id.menuGuessed);
         
         int total = BrandManager.size();
         int totalGuessed = BrandManager.sizeGuessed();

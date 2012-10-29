@@ -30,6 +30,7 @@ public class MainActivity extends Activity {
 	public Button variant4;
 	public TextView brandName;
 	public View variants;
+	public MenuItem menuGuessed;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -108,6 +109,12 @@ public class MainActivity extends Activity {
     	BrandManager.guessed(brandIndex);
     	brandName.setVisibility(View.VISIBLE);
     	variants.setVisibility(View.GONE);
+    	
+    	if(menuGuessed != null) {
+    		int total = BrandManager.size();
+            int totalGuessed = BrandManager.sizeGuessed();
+            menuGuessed.setTitle("Guessed "+String.valueOf(totalGuessed) + "/" + String.valueOf(total));
+    	}
     }
     
     public void restart() {
@@ -131,7 +138,7 @@ public class MainActivity extends Activity {
             getActionBar().setDisplayHomeAsUpEnabled(true);
         }
         
-        MenuItem menuGuessed = menu.findItem(R.id.menuGuessed);
+        menuGuessed = menu.findItem(R.id.menuGuessed);
         
         int total = BrandManager.size();
         int totalGuessed = BrandManager.sizeGuessed();
