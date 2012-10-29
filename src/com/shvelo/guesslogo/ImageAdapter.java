@@ -20,23 +20,24 @@ public class ImageAdapter extends BaseAdapter {
 	}
 
 	public View getView(int position, View convertView, ViewGroup parent) {
-		View v = convertView;
+		View v;
 		
 		Brand item = (Brand)getItem(position);
 		
 		if (convertView == null) {
-			LayoutInflater li = (LayoutInflater) context
-					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			LayoutInflater li = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			v = li.inflate(R.layout.grid_item, null);
-
-			ImageView iv = (ImageView) v.findViewById(R.id.grid_item);
-			iv.setImageDrawable(item.logo);
+		} else {
+			v = convertView;
 		}
-
+		
+		ImageView iv = (ImageView) v.findViewById(R.id.grid_item);
+		iv.setImageDrawable(item.logo);
+		
 		if (item.guessed) {
 			v.setBackgroundColor(Color.GRAY);
 		}
-
+		
 		return v;
 	}
 
