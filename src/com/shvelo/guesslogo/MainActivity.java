@@ -50,7 +50,6 @@ public class MainActivity extends Activity {
 			public void onClick(View v) {
 				if(brand.correct == 1) {
 					guessed();
-					Log.v("guess","correct");
 				}
 			}
 		});
@@ -59,7 +58,6 @@ public class MainActivity extends Activity {
 			public void onClick(View v) {
 				if(brand.correct == 2) {
 					guessed();
-					Log.v("guess","correct");
 				}
 			}
 		});
@@ -68,7 +66,6 @@ public class MainActivity extends Activity {
 			public void onClick(View v) {
 				if(brand.correct == 3) {
 					guessed();
-					Log.v("guess","correct");
 				}
 			}
 		});
@@ -77,7 +74,6 @@ public class MainActivity extends Activity {
 			public void onClick(View v) {
 				if(brand.correct == 4) {
 					guessed();
-					Log.v("guess","correct");
 				}
 			}
 		});
@@ -101,7 +97,7 @@ public class MainActivity extends Activity {
         variant4.setText(brand.getVariant(4));
         brandName.setText(brand.name);
         
-        if(BrandManager.isGuessed(brandIndex)) {
+        if(brand.guessed) {
         	guessed();
         } else {
         	
@@ -138,7 +134,7 @@ public class MainActivity extends Activity {
         MenuItem menuGuessed = menu.findItem(R.id.menuGuessed);
         
         int total = BrandManager.size();
-        int totalGuessed = total - BrandManager.unguessed.size();
+        int totalGuessed = BrandManager.sizeGuessed();
         
         menuGuessed.setTitle("Guessed "+String.valueOf(totalGuessed) + "/" + String.valueOf(total));
         

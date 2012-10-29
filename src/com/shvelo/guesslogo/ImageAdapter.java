@@ -32,12 +32,13 @@ public View getView(int position, View convertView, ViewGroup parent)
  {
     LayoutInflater li = (LayoutInflater) context.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
     v = li.inflate(R.layout.grid_item, null);
-   
+    
     ImageView iv = (ImageView)v.findViewById(R.id.grid_item);
     iv.setImageDrawable(BrandManager.get(position).logo);
-    if(BrandManager.isGuessed(position)){
-    	v.setBackgroundColor(Color.GREEN);
-    }
+ }
+ 
+ if(BrandManager.get(position).guessed){
+ 	v.setBackgroundColor(Color.GREEN);
  }
 
  return v;

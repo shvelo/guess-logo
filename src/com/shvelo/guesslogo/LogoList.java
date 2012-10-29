@@ -56,7 +56,7 @@ public class LogoList extends Activity {
         MenuItem menuGuessed = menu.findItem(R.id.menuGuessed);
         
         int total = BrandManager.size();
-        int totalGuessed = total - BrandManager.unguessed.size();
+        int totalGuessed = BrandManager.sizeGuessed();
         
         menuGuessed.setTitle("Guessed "+String.valueOf(totalGuessed) + "/" + String.valueOf(total));
         
