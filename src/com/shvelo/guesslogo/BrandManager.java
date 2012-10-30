@@ -92,6 +92,15 @@ public class BrandManager {
         activity.startActivity(intent);
 	}
 	
+	public static void next(int id) {
+		
+		if(id < brands.size() - 1) {
+			showGuessingScreen(id + 1);
+		} else {
+			showGuessingScreen(0);
+		}
+	}
+	
 	public static Boolean validateGuess(int id, String name) {
 		
     	if(name.toLowerCase().contentEquals(get(id).name.toLowerCase())) {
@@ -121,9 +130,9 @@ public class BrandManager {
 	
 	public static Boolean allGuessed() {
 		for(int i = 0; i < brands.size(); i++) {
-			if(brands.get(i).guessed)
-				return true;
+			if(!brands.get(i).guessed)
+				return false;
 		}
-		return false;
+		return true;
 	}
 }

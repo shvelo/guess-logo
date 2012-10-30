@@ -12,5 +12,6 @@
     <string name="all_logos_guessed">All Logos Guessed!</string>
     <string name="title_activity_logo_list">Guess Logo</string>
     <string name="back">&lt; Back</string>
+    <string name="logo">Logo</string>
 
 </resources>

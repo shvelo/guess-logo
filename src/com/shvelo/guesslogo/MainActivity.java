@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,6 +23,8 @@ public class MainActivity extends Activity {
 	public Button variant2;
 	public Button variant3;
 	public Button variant4;
+	public Button nextButton;
+	public Button restartButton;
 	public TextView brandName;
 	public View variants;
 	public MenuItem menuGuessed;
@@ -38,13 +41,22 @@ public class MainActivity extends Activity {
         variant2 = (Button)findViewById(R.id.variant2);
         variant3 = (Button)findViewById(R.id.variant3);
         variant4 = (Button)findViewById(R.id.variant4);
+        nextButton = (Button)findViewById(R.id.nextButton);
+        restartButton = (Button)findViewById(R.id.restartButton);
         brandName = (TextView)findViewById(R.id.brandName);
         variants = findViewById(R.id.variants);
+        
+        if(BrandManager.allGuessed()) {
+        	nextButton.setVisibility(View.GONE);
+        	restartButton.setVisibility(View.VISIBLE);
+        }
         
         variant1.setOnClickListener(new OnClickListener(){
 			public void onClick(View v) {
 				if(brand.correct == 1) {
 					guessed();
+				} else {
+					v.setEnabled(false);
 				}
 			}
 		});
@@ -53,6 +65,8 @@ public class MainActivity extends Activity {
 			public void onClick(View v) {
 				if(brand.correct == 2) {
 					guessed();
+				} else {
+					v.setEnabled(false);
 				}
 			}
 		});
@@ -61,6 +75,8 @@ public class MainActivity extends Activity {
 			public void onClick(View v) {
 				if(brand.correct == 3) {
 					guessed();
+				} else {
+					v.setEnabled(false);
 				}
 			}
 		});
@@ -69,7 +85,21 @@ public class MainActivity extends Activity {
 			public void onClick(View v) {
 				if(brand.correct == 4) {
 					guessed();
+				} else {
+					v.setEnabled(false);
 				}
+			}
+		});
+        
+        nextButton.setOnClickListener(new OnClickListener(){
+			public void onClick(View v) {
+				next();
+			}
+		});
+        
+        restartButton.setOnClickListener(new OnClickListener(){
+			public void onClick(View v) {
+				restart();
 			}
 		});
         
@@ -104,6 +134,11 @@ public class MainActivity extends Activity {
     	brandName.setVisibility(View.VISIBLE);
     	variants.setVisibility(View.GONE);
     	
+    	if(BrandManager.allGuessed()) {
+        	nextButton.setVisibility(View.GONE);
+        	restartButton.setVisibility(View.VISIBLE);
+        }
+    	
     	if(menuGuessed != null) {
     		int total = BrandManager.size();
             int totalGuessed = BrandManager.sizeGuessed();
@@ -113,6 +148,10 @@ public class MainActivity extends Activity {
     
     public void restart() {
     	BrandManager.restart();
+    }
+    
+    public void next() {
+    	BrandManager.next(brandIndex);
     }
     
 	@Override
