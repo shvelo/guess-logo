@@ -93,11 +93,13 @@ public class BrandManager {
 	}
 	
 	public static void next(int id) {
+		if(allGuessed()) return;
 		
-		if(id < brands.size() - 1) {
-			showGuessingScreen(id + 1);
-		} else {
-			showGuessingScreen(0);
+		for(int i = 0; i < brands.size(); i++) {
+			if(i == id) continue;
+			
+			if(!brands.get(i).guessed)
+				showGuessingScreen(i);
 		}
 	}
 	

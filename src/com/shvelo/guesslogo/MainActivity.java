@@ -45,7 +45,7 @@ public class MainActivity extends Activity {
         brandName = (TextView)findViewById(R.id.brandName);
         variants = findViewById(R.id.variants);
         
-        if(BrandManager.allGuessed()) {
+        if(BrandManager.allGuessed() || BrandManager.size() - BrandManager.sizeGuessed() == 1) {
         	nextButton.setVisibility(View.GONE);
         	restartButton.setVisibility(View.VISIBLE);
         }
