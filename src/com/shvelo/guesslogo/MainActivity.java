@@ -176,6 +176,13 @@ public class MainActivity extends Activity {
         int totalGuessed = BrandManager.sizeGuessed();
         
         menuGuessed.setTitle("Guessed "+String.valueOf(totalGuessed) + "/" + String.valueOf(total));
+        menuGuessed.setOnMenuItemClickListener(new OnMenuItemClickListener(){
+			public boolean onMenuItemClick(MenuItem item) {
+				BrandManager.showLogoList();
+				return false;
+			}
+        });
+        
         
         return true;
     }
