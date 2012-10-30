@@ -72,8 +72,8 @@ public class DBHelper extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		database = db;
-		database.execSQL(TABLE_CREATE);
-		loadDB();
+		db.execSQL(TABLE_CREATE);
+		loadDB(db);
 	}
 
 	@Override
@@ -90,7 +90,7 @@ public class DBHelper extends SQLiteOpenHelper {
 		
 		db.execSQL("DROP TABLE brands");
 		db.execSQL(TABLE_CREATE);
-		loadDB();
+		loadDB(db);
 		
 		db.beginTransaction();		
 		for(int i = 0; i < guessed.size(); i++) {
@@ -102,16 +102,16 @@ public class DBHelper extends SQLiteOpenHelper {
 		db.endTransaction();
 	}
 	
-	private void loadDB() {
+	private void loadDB(SQLiteDatabase db) {
 		try {
-			loadLogos();
+			loadLogos(db);
 		} catch (IOException e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		}
 	}
 
-	private void loadLogos() throws IOException {
+	private void loadLogos(SQLiteDatabase db) throws IOException {
 		InputStream inputStream = context.getAssets().open("brands.json");
 		BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
 
@@ -127,11 +127,11 @@ public class DBHelper extends SQLiteOpenHelper {
 		
 		BrandEntry[] brands = gson.fromJson(jsonBuilder.toString(), BrandEntry[].class);
 
-		database.beginTransaction();
+		db.beginTransaction();
 		try {
 			for(int i = 0; i < brands.length; i++) {
 				BrandEntry brandEntry = brands[i];
-				database.execSQL(
+				db.execSQL(
 						"INSERT INTO brands(name,logo,variant1,variant2,variant3,variant4,correct,guessed) values(?,?,?,?,?,?,?,0);"
 						, new String[]{
 							brandEntry.name, //name
@@ -140,10 +140,10 @@ public class DBHelper extends SQLiteOpenHelper {
 							String.valueOf(brandEntry.correct) //correct answer
 						});
 			}
-			database.setTransactionSuccessful();
+			db.setTransactionSuccessful();
 		} finally {
 			reader.close();
-			database.endTransaction();
+			db.endTransaction();
 		}
 	}
 	
