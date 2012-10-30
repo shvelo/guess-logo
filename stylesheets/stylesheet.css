@@ -113,9 +113,10 @@ header h2 {
 }
 
 #main-content .twoimages img {
-	max-width: 48%;
+	max-width: 49%;
 	float: left;
-	margin-right: 1%;
+	margin-right: .5%;
+	margin-left: .5%;
 }
 
 aside#sidebar {
@@ -479,6 +480,11 @@ footer a:hover {
     padding-right: 0;
     margin-left: 0;
   }
+  #main-content .twoimages img {
+		max-width: 100%;
+		float: none;
+		margin: 0;
+	}
 }
 
 /* Mobile Landscape Size to Tablet Portrait (devices and browsers) */
