@@ -1,4 +1,0 @@
-INSERT INTO brands(name,logo,variant1,variant2,variant3,variant4,correct,guessed) values("Android","@drawable/android","Greendroid","BotGreen","Google","Android",4,0);
-INSERT INTO brands(name,logo,variant1,variant2,variant3,variant4,correct,guessed) values("GitHub","@drawable/github","GitHub","CodeCats","Octogit","Git",1,0);
-INSERT INTO brands(name,logo,variant1,variant2,variant3,variant4,correct,guessed) values("Nintendo","@drawable/nintendo","Atari","Nintendo","Redpill","SEGA",2,0);
-INSERT INTO brands(name,logo,variant1,variant2,variant3,variant4,correct,guessed) values("Puma","@drawable/puma","Levi's","Jaguar","Puma","Bigcat",3,0);
