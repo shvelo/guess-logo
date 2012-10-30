@@ -1,11 +1,14 @@
 package com.shvelo.guesslogo;
 
 import java.io.BufferedReader;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.google.gson.Gson;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -19,7 +22,7 @@ public class DBHelper extends SQLiteOpenHelper {
 	private final Context context;
 
 	private static final String DATABASE_NAME = "brands.db3";
-	private static final int DATABASE_VERSION = 1;
+	private static final int DATABASE_VERSION = 2;
 	
 	private static final String TABLE_CREATE = "CREATE TABLE brands("+
 			"_id INTEGER PRIMARY KEY,"+
@@ -100,27 +103,42 @@ public class DBHelper extends SQLiteOpenHelper {
 	}
 	
 	private void loadDB() {
-		new Thread(new Runnable() {
-			public void run() {
-				try {
-					loadLogos();
-				} catch (IOException e) {
-					throw new RuntimeException(e);
-				}
-			}
-		}).start();
+		try {
+			loadLogos();
+		} catch (IOException e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
 	}
 
 	private void loadLogos() throws IOException {
-		InputStream inputStream = context.getAssets().open("brands.sql");
+		InputStream inputStream = context.getAssets().open("brands.json");
 		BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
 
 		String line;
 		
-		database.beginTransaction();		
+		StringBuilder jsonBuilder = new StringBuilder();
+		
+		while ((line = reader.readLine()) != null) {
+			jsonBuilder.append(line);
+		}
+		
+		Gson gson = new Gson();
+		
+		BrandEntry[] brands = gson.fromJson(jsonBuilder.toString(), BrandEntry[].class);
+
+		database.beginTransaction();
 		try {
-			while ((line = reader.readLine()) != null) {
-				database.execSQL(line);
+			for(int i = 0; i < brands.length; i++) {
+				BrandEntry brandEntry = brands[i];
+				database.execSQL(
+						"INSERT INTO brands(name,logo,variant1,variant2,variant3,variant4,correct,guessed) values(?,?,?,?,?,?,?,0);"
+						, new String[]{
+							brandEntry.name, //name
+							"@drawable/" + brandEntry.logo, //logo
+							brandEntry.variants[0], brandEntry.variants[1], brandEntry.variants[2] ,brandEntry.variants[3], //variants
+							String.valueOf(brandEntry.correct) //correct answer
+						});
 			}
 			database.setTransactionSuccessful();
 		} finally {

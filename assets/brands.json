@@ -1,0 +1,26 @@
+[
+	{
+		"name":"Android",
+		"logo":"android",
+		"variants":["Greendroid", "Botgreen", "Google", "Android"],
+		"correct": 4
+	},
+	{
+		"name":"GitHub",
+		"logo":"github",
+		"variants":["GitHub", "Codecats", "Octogit", "Git"],
+		"correct": 1
+	},
+	{
+		"name":"Nintendo",
+		"logo":"nintendo",
+		"variants":["Atari","Nintendo","Redpill","SEGA"],
+		"correct": 2
+	},
+	{
+		"name":"Puma",
+		"logo":"puma",
+		"variants":["Levi's","Jaguar","Puma","Bigcat"],
+		"correct": 3
+	}
+]
