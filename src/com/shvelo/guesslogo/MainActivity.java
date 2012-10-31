@@ -8,6 +8,7 @@ import android.content.res.Resources;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View.OnClickListener;
 import android.widget.*;
@@ -30,6 +31,10 @@ public class MainActivity extends Activity {
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
+    	if(android.os.Build.VERSION.SDK_INT < 11) {
+            requestWindowFeature(Window.FEATURE_NO_TITLE);
+        }
+    	
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
@@ -156,7 +161,7 @@ public class MainActivity extends Activity {
 	@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.global, menu);
-        
+                
         MenuItem menuRestart = menu.findItem(R.id.menuRestart);
         
         menuRestart.setOnMenuItemClickListener(new OnMenuItemClickListener(){
@@ -176,13 +181,6 @@ public class MainActivity extends Activity {
         int totalGuessed = BrandManager.sizeGuessed();
         
         menuGuessed.setTitle("Guessed "+String.valueOf(totalGuessed) + "/" + String.valueOf(total));
-        menuGuessed.setOnMenuItemClickListener(new OnMenuItemClickListener(){
-			public boolean onMenuItemClick(MenuItem item) {
-				BrandManager.showLogoList();
-				return false;
-			}
-        });
-        
         
         return true;
     }
@@ -198,5 +196,10 @@ public class MainActivity extends Activity {
 	        default:
 	            return super.onOptionsItemSelected(item);
 	    }
+	}
+	
+	@Override
+	public void onBackPressed() {
+	   BrandManager.showLogoList();
 	}
 }
