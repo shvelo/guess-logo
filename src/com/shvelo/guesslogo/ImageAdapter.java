@@ -1,6 +1,7 @@
 package com.shvelo.guesslogo;
 
 import android.content.Context;
+
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;

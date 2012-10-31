@@ -4,13 +4,14 @@
     android:layout_height="match_parent"
     android:layout_alignParentLeft="true"
     android:layout_alignParentTop="true"
-    android:orientation="vertical">
-
+    android:orientation="vertical"
+    android:overScrollMode="ifContentScrolls" >
+
     <GridView
         android:id="@+id/logo_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:columnWidth="100dp"
+        android:columnWidth="140dp"
         android:gravity="center"
         android:horizontalSpacing="10dp"
         android:numColumns="auto_fit"

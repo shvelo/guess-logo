@@ -1,6 +1,5 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/LinearLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -9,36 +8,36 @@
     android:scrollbarStyle="insideOverlay"
     android:scrollbars="vertical"
     >
-
+
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical" >
-
+
     <ImageView
         android:id="@+id/logoImage"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="240dp"
+        android:layout_height="240dp"
         android:layout_gravity="center"
-        android:layout_marginBottom="15dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
         android:contentDescription="@string/logoDescription"
         android:maxHeight="40dp"
         android:maxWidth="40dp"
         android:scaleType="fitCenter"
         android:src="@android:drawable/sym_def_app_icon" />
-
+    
     <LinearLayout
         android:id="@+id/variants"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:clickable="false"
         android:orientation="vertical" >
-
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp" >
+            android:layout_gravity="center" >
 
             <Button
                 android:id="@+id/variant3"
@@ -72,7 +71,7 @@
                 android:layout_marginLeft="20dp"
                 android:text="" />
         </LinearLayout>
-    </LinearLayout>
+    </LinearLayout>
     <TextView
         android:id="@+id/brandName"
         android:layout_width="wrap_content"
@@ -80,25 +79,27 @@
         android:layout_gravity="center"
         android:text=""
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:visibility="gone" />
-    <Button
-        android:id="@+id/nextButton"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="15dp"
-        android:text="@string/next" />
-    
+        android:visibility="gone" />
+
     <Button
         android:id="@+id/restartButton"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_margin="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="5dp"
         android:text="@string/restart"
         android:visibility="gone" />
-
-
+
+    <Button
+        android:id="@+id/nextButton"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="5dp"
+        android:text="@string/next" />
+    
 </LinearLayout>
-
 </ScrollView>
