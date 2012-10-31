@@ -5,8 +5,8 @@
     android:layout_alignParentLeft="true"
     android:layout_alignParentTop="true"
     android:orientation="vertical"
-    android:overScrollMode="ifContentScrolls" >
-
+    android:overScrollMode="ifContentScrolls"
+     >
     <GridView
         android:id="@+id/logo_list"
         android:layout_width="match_parent"
@@ -15,11 +15,9 @@
         android:gravity="center"
         android:horizontalSpacing="10dp"
         android:numColumns="auto_fit"
-        android:overScrollMode="always"
+        android:overScrollMode="ifContentScrolls"
         android:padding="10dp"
         android:stretchMode="columnWidth"
-        android:verticalSpacing="10dp" >
-
-    </GridView>
+        android:verticalSpacing="10dp" />
 
 </LinearLayout>

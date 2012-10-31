@@ -36,7 +36,7 @@ public class ImageAdapter extends BaseAdapter {
 		iv.setImageDrawable(item.logo);
 		
 		if (item.guessed) {
-			v.setBackgroundColor(Color.GRAY);
+			v.setBackgroundColor(Color.argb(40, 0, 0, 0));
 		} else {
 			v.setBackgroundColor(Color.TRANSPARENT);
 		}
