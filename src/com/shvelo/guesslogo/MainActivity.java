@@ -137,6 +137,7 @@ public class MainActivity extends Activity {
     	BrandManager.guessed(brandIndex);
     	brandName.setVisibility(View.VISIBLE);
     	variants.setVisibility(View.GONE);
+    	setTitle(res.getString(R.string.guessed));
     	
     	if(BrandManager.allGuessed()) {
         	nextButton.setVisibility(View.GONE);
@@ -180,8 +181,7 @@ public class MainActivity extends Activity {
         int total = BrandManager.size();
         int totalGuessed = BrandManager.sizeGuessed();
         
-        menuGuessed.setTitle("Guessed "+String.valueOf(totalGuessed) + "/" + String.valueOf(total));
-        
+        menuGuessed.setTitle(res.getString(R.string.guessed)+" "+String.valueOf(totalGuessed) + "/" + String.valueOf(total));
         return true;
     }
 	

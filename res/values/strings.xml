@@ -13,5 +13,6 @@
     <string name="title_activity_logo_list">Guess Logo</string>
     <string name="back">&lt; Back</string>
     <string name="logo">Logo</string>
+    <string name="guessed">Guessed</string>
 
 </resources>

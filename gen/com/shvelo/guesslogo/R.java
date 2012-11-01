@@ -50,6 +50,7 @@ public final class R {
         public static final int all_logos_guessed=0x7f050009;
         public static final int app_name=0x7f050000;
         public static final int back=0x7f05000b;
+        public static final int guessed=0x7f05000d;
         public static final int hello_world=0x7f050001;
         public static final int hintText=0x7f050007;
         public static final int logo=0x7f05000c;
