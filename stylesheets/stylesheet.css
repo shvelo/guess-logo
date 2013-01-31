@@ -138,6 +138,17 @@ aside#sidebar p.repo-owner a {
   margin-bottom: 40px;
 }
 
+a.play {
+  margin-bottom: 20px;
+  display: block;
+}
+
+a.play img {
+  width: 202px;
+  height: 80px;
+  display: block;
+}
+
 a.button {
   width: 134px;
   height: 58px;
@@ -148,6 +159,7 @@ a.button {
   padding-top: 22px;
   font-family: 'Architects Daughter', 'Helvetica Neue', Helvetica, Arial, serif; 
 }
+
 a.button small {
   display: block;
   font-size: 11px;
