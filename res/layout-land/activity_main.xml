@@ -56,48 +56,56 @@
             android:gravity="center"
             android:orientation="vertical" >
 
-
-
             <LinearLayout
                 android:id="@+id/variants"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
                 android:gravity="center"
                 android:orientation="vertical" >
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center" >
+                    android:layout_gravity="center"
+                    android:gravity="center" >
 
                     <Button
                         android:id="@+id/variant3"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
 
                     <Button
                         android:id="@+id/variant4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp" />
+                        android:layout_marginLeft="20dp"
+                        android:layout_weight="1" />
+
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center" >
+                    android:layout_gravity="center"
+                    android:gravity="center" >
 
                     <Button
                         android:id="@+id/variant1"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
 
                     <Button
                         android:id="@+id/variant2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp" />
+                        android:layout_marginLeft="20dp"
+                        android:layout_weight="1" />
+
                 </LinearLayout>
             </LinearLayout>
 
