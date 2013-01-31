@@ -5,5 +5,5 @@ Works on Android 2.3+
 
 ## Screenshots  
 
-![Main Screen](http://shvelo.github.com/guess-logo/images/screenshot/main.png?v2)
-![Guessing Screen](http://shvelo.github.com/guess-logo/images/screenshot/logoscreen.png?v2)
+![Main Screen](http://shvelo.github.com/guess-logo/images/screenshot/main.png?v3)
+![Guessing Screen](http://shvelo.github.com/guess-logo/images/screenshot/logoscreen.png?v3)
