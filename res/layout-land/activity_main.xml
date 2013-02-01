@@ -76,14 +76,14 @@
                         android:id="@+id/variant3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1" />
+                        style="@style/App.Button" />
 
                     <Button
                         android:id="@+id/variant4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
-                        android:layout_weight="1" />
+                        style="@style/App.Button" />
 
                 </LinearLayout>
 
@@ -97,14 +97,14 @@
                         android:id="@+id/variant1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1" />
+                        style="@style/App.Button" />
 
                     <Button
                         android:id="@+id/variant2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
-                        android:layout_weight="1" />
+                        style="@style/App.Button" />
 
                 </LinearLayout>
             </LinearLayout>
@@ -121,6 +121,7 @@
 
             <Button
                 android:id="@+id/nextButton"
+                style="@style/App.Button"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
@@ -132,6 +133,7 @@
 
             <Button
                 android:id="@+id/restartButton"
+                style="@style/App.Button"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

@@ -2,4 +2,7 @@
 
     <style name="AppTheme" parent="android:Theme.Light" />
     
+    <style name="App.Button" parent="@style/Default.Button" />
+    <style name="App.Text" parent="@style/Default.Text" />
+    
 </resources>

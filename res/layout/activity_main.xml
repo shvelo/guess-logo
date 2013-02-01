@@ -44,17 +44,17 @@
 
             <Button
                 android:id="@+id/variant3"
+                style="@style/App.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:text="" />
 
             <Button
                 android:id="@+id/variant4"
+                style="@style/App.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:layout_weight="1"
                 android:text="" />
 
         </LinearLayout>
@@ -68,7 +68,7 @@
                 android:id="@+id/variant1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                style="@style/App.Button"
                 android:text="" />
 
             <Button
@@ -76,7 +76,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:layout_weight="1"
+                style="@style/App.Button"
                 android:text="" />
 
         </LinearLayout>
@@ -84,6 +84,7 @@
 
     <TextView
         android:id="@+id/brandName"
+        style="@style/App.Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -99,25 +100,16 @@
         android:id="@+id/restartButton"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        style="@style/App.Button"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:layout_marginTop="5dp"
         android:text="@string/restart"
         android:visibility="gone" />
 
-
-
-
-
-
-
-
-
-
-
     <Button
         android:id="@+id/nextButton"
+        style="@style/App.Button"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
