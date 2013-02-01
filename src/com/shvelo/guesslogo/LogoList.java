@@ -7,7 +7,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View;
-import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
@@ -18,10 +17,6 @@ public class LogoList extends Activity {
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
-    	if(android.os.Build.VERSION.SDK_INT < 11) {
-            requestWindowFeature(Window.FEATURE_NO_TITLE);
-        }
-    	
         super.onCreate(savedInstanceState);
         
         setContentView(R.layout.activity_logo_list);
