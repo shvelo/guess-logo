@@ -1,0 +1,19 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <style name="Button" parent="@style/Default_Button">
+        <item name="android:textSize">50sp</item>
+    </style>
+
+    <style name="Text" parent="@style/Default_Text">
+        <item name="android:textSize">50sp</item>
+    </style>
+    
+    <style name="Logo" parent="@style/Default_Logo">
+        <item name="android:layout_width">300dp</item>
+        <item name="android:layout_height">300dp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_margin">10dp</item>
+        <item name="android:scaleType">fitCenter</item>
+    </style>
+
+</resources>

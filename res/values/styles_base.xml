@@ -1,9 +1,0 @@
-<resources xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <style name="Default.Button" parent="android:Button">
-        <item name="android:layout_weight">1</item>
-    </style>
-    
-    <style name="Default.Text" />
-    
-</resources>

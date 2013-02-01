@@ -1,7 +1,10 @@
 <resources>
 
     <style name="AppTheme" parent="android:Theme.Holo.Light.DarkActionBar" />
-    <style name="App.Button" parent="@style/Default.Button" />
-    <style name="App.Text" parent="@style/Default.Text" />
+        
+    <style name="Default_Button" />
 
+    <style name="Default_Text" />
+    
+    <style name="Default_Logo" />
 </resources>

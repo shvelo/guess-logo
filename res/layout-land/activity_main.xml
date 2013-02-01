@@ -31,13 +31,8 @@
 
             <ImageView
                 android:id="@+id/logoImage"
-                android:layout_width="240dp"
-                android:layout_height="240dp"
-                android:layout_gravity="center"
+                style="@style/Logo"
                 android:contentDescription="@string/logoDescription"
-                android:maxHeight="40dp"
-                android:maxWidth="40dp"
-                android:scaleType="fitCenter"
                 android:src="@android:drawable/sym_def_app_icon" />
 
         </LinearLayout>
@@ -74,16 +69,18 @@
 
                     <Button
                         android:id="@+id/variant3"
+                        style="@style/Button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        style="@style/App.Button" />
+                        android:layout_weight="1" />
 
                     <Button
                         android:id="@+id/variant4"
+                        style="@style/Button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
-                        style="@style/App.Button" />
+                        android:layout_weight="1" />
 
                 </LinearLayout>
 
@@ -95,16 +92,18 @@
 
                     <Button
                         android:id="@+id/variant1"
+                        style="@style/Button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        style="@style/App.Button" />
+                        android:layout_weight="1" />
 
                     <Button
                         android:id="@+id/variant2"
+                        style="@style/Button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
-                        style="@style/App.Button" />
+                        android:layout_weight="1" />
 
                 </LinearLayout>
             </LinearLayout>
@@ -112,7 +111,7 @@
 
             <TextView
                 android:id="@+id/brandName"
-                style="@style/App.Text"
+                style="@style/Text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -122,7 +121,7 @@
 
             <Button
                 android:id="@+id/nextButton"
-                style="@style/App.Button"
+                style="@style/Button"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
@@ -134,7 +133,7 @@
 
             <Button
                 android:id="@+id/restartButton"
-                style="@style/App.Button"
+                style="@style/Button"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

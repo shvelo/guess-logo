@@ -1,8 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <style name="AppTheme" parent="android:Theme.Light" />
     
-    <style name="App.Button" parent="@style/Default.Button" />
-    <style name="App.Text" parent="@style/Default.Text" />
+    <style name="Default_Button" />
+
+    <style name="Default_Text" />
     
+    <style name="Default_Logo" />
+
 </resources>
