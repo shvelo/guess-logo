@@ -12,8 +12,10 @@ import com.google.gson.Gson;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 public class DBHelper extends SQLiteOpenHelper {
 
@@ -22,19 +24,7 @@ public class DBHelper extends SQLiteOpenHelper {
 	private final Context context;
 
 	private static final String DATABASE_NAME = "brands.db3";
-	private static final int DATABASE_VERSION = 2;
-	
-	private static final String TABLE_CREATE = "CREATE TABLE brands("+
-			"_id INTEGER PRIMARY KEY,"+
-			"name TEXT,"+
-			"logo TEXT,"+
-			"variant1 TEXT,"+
-			"variant2 TEXT,"+
-			"variant3 TEXT,"+
-			"variant4 TEXT,"+
-			"correct INTEGER,"+
-			"guessed INTEGER"+
-	")";
+	private static final int DATABASE_VERSION = 4;
 
 	/**
 	 * Constructor Takes and keeps a reference of the passed context in order to
@@ -71,8 +61,11 @@ public class DBHelper extends SQLiteOpenHelper {
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
+		
 		database = db;
-		db.execSQL(TABLE_CREATE);
+		
+		execSQLFile("schema.sql", db);
+		
 		loadDB(db);
 	}
 
@@ -88,16 +81,32 @@ public class DBHelper extends SQLiteOpenHelper {
         		guessed.add(query.getInt(query.getColumnIndex("_id")));
 		}
 		
-		db.execSQL("DROP TABLE brands");
-		db.execSQL(TABLE_CREATE);
+		int score = 0;
+		
+		if(oldVersion >= 4) {
+			Cursor cursor = db.rawQuery("SELECT value FROM userdata WHERE name='score'", null);
+			cursor.moveToFirst();
+			score = cursor.getInt(0);
+		}
+		
+		execSQLFile("schema_drop.sql", db);
+		execSQLFile("schema.sql", db);
+		
 		loadDB(db);
 		
-		db.beginTransaction();		
+		db.beginTransaction();
+		
 		for(int i = 0; i < guessed.size(); i++) {
 			db.execSQL("UPDATE brands SET guessed=1 WHERE _id=?", new String[] {
 					guessed.get(i).toString()
 			});
 		}
+		if(oldVersion >= 4 && score > 0) {
+			db.rawQuery("UPDATE userdata SET value=? WHERE name='score'", new String[]{
+				String.valueOf(score)
+			});
+		}
+		
 		db.setTransactionSuccessful();
 		db.endTransaction();
 	}
@@ -147,4 +156,33 @@ public class DBHelper extends SQLiteOpenHelper {
 		}
 	}
 	
+	private String readFile(String name) throws IOException {
+		InputStream inputStream = context.getAssets().open(name);
+		BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+		String line;
+		StringBuilder builder = new StringBuilder();
+		
+		while ((line = reader.readLine()) != null) {
+			builder.append(line);
+		}
+		
+		return builder.toString();
+	}
+	
+	private void execSQLFile(String name, SQLiteDatabase db) {
+		try {
+			String sql = readFile(name);
+			
+			String[] lines = sql.split("(?!\".*?;.*?\")(?!'.*?;.*?');");
+			for(int i = 0; i < lines.length; i++) {
+				Log.d("guesslogo", lines[i]);
+				String statement = lines[i];
+				statement.replaceAll("[\\s\\n\\t ]","");
+				db.execSQL(statement);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+		}
+	}	
 }

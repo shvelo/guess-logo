@@ -14,6 +14,7 @@ public class LogoList extends Activity {
 
 	public ImageAdapter adapter;
 	public MenuItem menuGuessed;
+	public MenuItem menuScore;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -44,8 +45,10 @@ public class LogoList extends Activity {
     	if(menuGuessed != null) {
     		int total = BrandManager.size();
             int totalGuessed = BrandManager.sizeGuessed();
-            menuGuessed.setTitle("Guessed "+String.valueOf(totalGuessed) + "/" + String.valueOf(total));
+            menuGuessed.setTitle("Guessed: "+String.valueOf(totalGuessed) + "/" + String.valueOf(total));
     	}
+    	
+    	updateScore();
     }
 
     @Override
@@ -62,6 +65,9 @@ public class LogoList extends Activity {
         });
         
         menuGuessed = menu.findItem(R.id.menuGuessed);
+        menuScore = menu.findItem(R.id.menuScore);
+        
+        updateScore();
         
         int total = BrandManager.size();
         int totalGuessed = BrandManager.sizeGuessed();
@@ -70,4 +76,10 @@ public class LogoList extends Activity {
         
         return true;
     }
+    
+    public void updateScore() {
+    	if(menuScore != null) {
+    		menuScore.setTitle("Score: "+ BrandManager.getScore());
+    	}
+	}
 }

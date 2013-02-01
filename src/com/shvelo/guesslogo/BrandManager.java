@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+//import android.util.Log;
+import android.util.Log;
 
 public class BrandManager {
 	public static Context context;
@@ -28,6 +31,10 @@ public class BrandManager {
         
         for(int i = 0; i < query.getCount(); i++) {
         	query.moveToNext();
+        	
+        	/*for(int ii = 0; ii < query.getColumnNames().length; ii++) {
+        		Log.d("guesslogo", query.getColumnNames()[ii]);
+        	}*/
         	
         	int imageResource = context.getResources().getIdentifier(query.getString(query.getColumnIndex("logo")), null, context.getPackageName());
         	
@@ -65,6 +72,25 @@ public class BrandManager {
 		db.endTransaction();
 	}
 	
+	public static void updateScore(int score) {
+		if(score > 0) {
+			db.rawQuery("UPDATE userdata SET value=? WHERE name='score'", new String[]{
+					String.valueOf(score)
+			});
+			ContentValues values = new ContentValues();
+			values.put("value", score);
+			db.update("userdata", values, "name='score'", null);
+		}
+		Log.d("guesslogo", "update score "+score);
+	}
+	
+	public static int getScore() {
+		Cursor cursor = db.rawQuery("SELECT value FROM userdata WHERE name='score'", null);
+		cursor.moveToFirst();
+		Log.d("guesslogo", "score "+cursor.getString(0));
+		return cursor.getInt(0);
+	}
+	
 	public static Brand get(int id) {
 		return brands.get(id);
 	}
@@ -74,6 +100,7 @@ public class BrandManager {
 			brands.get(i).guessed = false;
 		}
 		db.execSQL("UPDATE brands SET guessed=0");
+		db.execSQL("UPDATE userdata SET value='0' WHERE name='score'");
 		showLogoList();
 	}
 	

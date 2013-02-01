@@ -28,8 +28,9 @@ public final class R {
         public static final int grid_item=0x7f08000a;
         public static final int logoImage=0x7f080001;
         public static final int logo_list=0x7f080000;
-        public static final int menuGuessed=0x7f08000b;
-        public static final int menuRestart=0x7f08000c;
+        public static final int menuGuessed=0x7f08000c;
+        public static final int menuRestart=0x7f08000d;
+        public static final int menuScore=0x7f08000b;
         public static final int nextButton=0x7f080009;
         public static final int restartButton=0x7f080008;
         public static final int variant1=0x7f080005;

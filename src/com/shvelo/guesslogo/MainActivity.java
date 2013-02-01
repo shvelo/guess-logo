@@ -27,6 +27,7 @@ public class MainActivity extends Activity {
 	public TextView brandName;
 	public View variants;
 	public MenuItem menuGuessed;
+	public MenuItem menuScore;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -52,41 +53,25 @@ public class MainActivity extends Activity {
         
         variant1.setOnClickListener(new OnClickListener(){
 			public void onClick(View v) {
-				if(brand.correct == 1) {
-					guessed();
-				} else {
-					v.setEnabled(false);
-				}
+				checkGuess(1,v);
 			}
 		});
         
         variant2.setOnClickListener(new OnClickListener(){
 			public void onClick(View v) {
-				if(brand.correct == 2) {
-					guessed();
-				} else {
-					v.setEnabled(false);
-				}
+				checkGuess(2,v);
 			}
 		});
         
         variant3.setOnClickListener(new OnClickListener(){
 			public void onClick(View v) {
-				if(brand.correct == 3) {
-					guessed();
-				} else {
-					v.setEnabled(false);
-				}
+				checkGuess(3,v);
 			}
 		});
         
         variant4.setOnClickListener(new OnClickListener(){
 			public void onClick(View v) {
-				if(brand.correct == 4) {
-					guessed();
-				} else {
-					v.setEnabled(false);
-				}
+				checkGuess(4,v);
 			}
 		});
         
@@ -108,6 +93,18 @@ public class MainActivity extends Activity {
         }
     }
     
+    public void checkGuess(int variant, View view) {
+    	if(brand.correct == variant) {
+    		BrandManager.updateScore(BrandManager.getScore() + 20);
+        	updateScore();
+    		guessed();
+    	} else {
+    		BrandManager.updateScore(BrandManager.getScore() - 5);
+        	updateScore();
+    		view.setEnabled(false);
+    	}
+    }
+    
     public void startGuessing(int index) {
     	
     	brandIndex = index;
@@ -123,8 +120,6 @@ public class MainActivity extends Activity {
         
         if(brand.guessed) {
         	guessed();
-        } else {
-        	
         }
     }
     
@@ -172,11 +167,13 @@ public class MainActivity extends Activity {
         }
         
         menuGuessed = menu.findItem(R.id.menuGuessed);
+        menuScore = menu.findItem(R.id.menuScore);
+        updateScore();
         
         int total = BrandManager.size();
         int totalGuessed = BrandManager.sizeGuessed();
         
-        menuGuessed.setTitle(res.getString(R.string.guessed)+" "+String.valueOf(totalGuessed) + "/" + String.valueOf(total));
+        menuGuessed.setTitle("Guessed: "+String.valueOf(totalGuessed) + "/" + String.valueOf(total));
         return true;
     }
 	
@@ -191,6 +188,12 @@ public class MainActivity extends Activity {
 	        default:
 	            return super.onOptionsItemSelected(item);
 	    }
+	}
+	
+	public void updateScore() {
+		if(menuScore != null) {
+			menuScore.setTitle("Score: "+ String.valueOf(BrandManager.getScore()));
+		}
 	}
 	
 	@Override

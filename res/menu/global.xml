@@ -1,7 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
-    <item android:id="@+id/menuGuessed" android:showAsAction="always|withText" android:enabled="false"></item><item android:id="@+id/menuRestart" android:title="@string/restart" android:visible="true" android:enabled="true"></item>
-    
-    
+
+    <item
+        android:title="Score: 0"
+        android:id="@+id/menuScore"
+        android:enabled="true"
+        android:showAsAction="always|withText">
+    </item>
+    <item
+        android:title="Guessed: 0/0"
+        android:id="@+id/menuGuessed"
+        android:enabled="false"
+        android:showAsAction="always|withText"
+        android:visible="false">
+    </item>
+    <item
+        android:id="@+id/menuRestart"
+        android:enabled="true"
+        android:title="@string/restart"
+        android:visible="true">
+    </item>
 
 </menu>

@@ -5,7 +5,8 @@
     </style>
 
     <style name="Text" parent="@style/Default_Text">
-        <item name="android:textSize">50sp</item>
+        <item name="android:textSize">80sp</item>
+        <item name="android:layout_margin">5sp</item>
     </style>
     
     <style name="Logo" parent="@style/Default_Logo">
