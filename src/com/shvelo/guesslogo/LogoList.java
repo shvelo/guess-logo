@@ -2,15 +2,15 @@ package com.shvelo.guesslogo;
 
 import android.os.Bundle;
 
-import android.app.Activity;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.MenuItem.OnMenuItemClickListener;
+import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
+import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
-public class LogoList extends Activity {
+public class LogoList extends SherlockActivity {
 
 	public ImageAdapter adapter;
 	public MenuItem menuGuessed;
@@ -53,7 +53,7 @@ public class LogoList extends Activity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.global, menu);
+        getSupportMenuInflater().inflate(R.menu.global, menu);
         
         MenuItem menuRestart = menu.findItem(R.id.menuRestart);
         

@@ -1,18 +1,19 @@
 package com.shvelo.guesslogo;
 
+import com.actionbarsherlock.app.SherlockActivity;
+
 import android.os.Bundle;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.view.Menu;
-import android.view.MenuItem;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
 import android.view.View;
-import android.view.MenuItem.OnMenuItemClickListener;
+import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
 import android.view.View.OnClickListener;
 import android.widget.*;
 
-public class MainActivity extends Activity {
+public class MainActivity extends SherlockActivity {
 
 	public int brandIndex;
 	public Brand brand;
@@ -151,7 +152,7 @@ public class MainActivity extends Activity {
     
 	@Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.global, menu);
+        getSupportMenuInflater().inflate(R.menu.global, menu);
                 
         MenuItem menuRestart = menu.findItem(R.id.menuRestart);
         
@@ -162,9 +163,7 @@ public class MainActivity extends Activity {
 			}
         });
                 
-        if(android.os.Build.VERSION.SDK_INT > 10) {
-            getActionBar().setDisplayHomeAsUpEnabled(true);
-        }
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         
         menuGuessed = menu.findItem(R.id.menuGuessed);
         menuScore = menu.findItem(R.id.menuScore);
