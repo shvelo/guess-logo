@@ -12,7 +12,6 @@ import com.google.gson.Gson;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -178,11 +177,11 @@ public class DBHelper extends SQLiteOpenHelper {
 				Log.d("guesslogo", lines[i]);
 				String statement = lines[i];
 				statement.replaceAll("[\\s\\n\\t ]","");
-				db.execSQL(statement);
+				if(!statement.isEmpty())
+					db.execSQL(statement);
 			}
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-		} catch (IOException e) {
 		}
-	}	
+	}
 }
