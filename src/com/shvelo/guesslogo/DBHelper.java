@@ -2,9 +2,12 @@ package com.shvelo.guesslogo;
 
 import java.io.BufferedReader;
 
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.security.DigestInputStream;
+import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +26,7 @@ public class DBHelper extends SQLiteOpenHelper {
 	private final Context context;
 
 	private static final String DATABASE_NAME = "brands.db3";
-	private static final int DATABASE_VERSION = 4;
+	private static final int DATABASE_VERSION = 5;
 
 	/**
 	 * Constructor Takes and keeps a reference of the passed context in order to
@@ -37,6 +40,9 @@ public class DBHelper extends SQLiteOpenHelper {
 		this.context = context;
 		
 		database = getReadableDatabase();
+		if(checkJSON()) {
+			update(database, null, null);
+		}
 	}
 	
 	/**
@@ -70,6 +76,30 @@ public class DBHelper extends SQLiteOpenHelper {
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		update(db, oldVersion, newVersion);
+	}
+	
+	public boolean checkJSON() {
+		try {
+			DigestInputStream is;
+			InputStream inputStream;
+			MessageDigest md = MessageDigest.getInstance("MD5");
+			inputStream = context.getAssets().open("brands.json");
+			is = new DigestInputStream(inputStream, md);
+			String digest = new String(md.digest());
+			is.close();
+			
+			Cursor cursor = database.rawQuery("SELECT value FROM userdata WHERE name='json_checksum'", null);
+			cursor.moveToFirst();
+			
+			if(digest == cursor.getString(0)) {
+				return false;
+			} else {
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 	
 	public void update(SQLiteDatabase db, Integer oldVersion, Integer newVersion) {

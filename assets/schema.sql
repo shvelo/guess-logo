@@ -15,3 +15,4 @@ CREATE TABLE userdata(
   value TEXT
 );
 INSERT INTO userdata(name,value) VALUES('score',0);
+INSERT INTO userdata(name,value) VALUES('json_checksum','');
