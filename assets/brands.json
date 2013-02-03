@@ -22,5 +22,11 @@
 		"logo":"puma",
 		"variants":["Levi's","Jaguar","Puma","Bigcat"],
 		"correct": 3
+	},
+	{
+		"name":"Metallica",
+		"logo":"metallica",
+		"variants":["Metal","Machina","Metallica","Manowar"],
+		"correct": 3
 	}
 ]

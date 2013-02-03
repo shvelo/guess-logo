@@ -926,8 +926,9 @@ containing a value of this type.
         public static final int ic_action_refresh=0x7f020071;
         public static final int ic_action_search=0x7f020072;
         public static final int ic_launcher=0x7f020073;
-        public static final int nintendo=0x7f020074;
-        public static final int puma=0x7f020075;
+        public static final int metallica=0x7f020074;
+        public static final int nintendo=0x7f020075;
+        public static final int puma=0x7f020076;
     }
     public static final class id {
         public static final int abs__action_bar=0x7f040022;

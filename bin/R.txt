@@ -249,8 +249,9 @@ int drawable github 0x7f020070
 int drawable ic_action_refresh 0x7f020071
 int drawable ic_action_search 0x7f020072
 int drawable ic_launcher 0x7f020073
-int drawable nintendo 0x7f020074
-int drawable puma 0x7f020075
+int drawable metallica 0x7f020074
+int drawable nintendo 0x7f020075
+int drawable puma 0x7f020076
 int id abs__action_bar 0x7f040022
 int id abs__action_bar_container 0x7f040021
 int id abs__action_bar_subtitle 0x7f040011

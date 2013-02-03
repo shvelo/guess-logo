@@ -62,7 +62,6 @@ public class DBHelper extends SQLiteOpenHelper {
 	public void onCreate(SQLiteDatabase db) {
 		
 		database = db;
-		
 		execSQLFile("schema.sql", db);
 		
 		loadDB(db);
@@ -70,7 +69,13 @@ public class DBHelper extends SQLiteOpenHelper {
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-		
+		update(db, oldVersion, newVersion);
+	}
+	
+	public void update(SQLiteDatabase db, Integer oldVersion, Integer newVersion) {
+		if(oldVersion == null) oldVersion = DATABASE_VERSION;
+		if(newVersion == null) newVersion = DATABASE_VERSION;
+				
 		List<Integer> guessed = new ArrayList<Integer>();
 		
 		Cursor query = db.query("brands", null, null, null, null, null, "name asc", null);
