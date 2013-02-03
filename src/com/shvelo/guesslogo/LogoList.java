@@ -1,5 +1,6 @@
 package com.shvelo.guesslogo;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.actionbarsherlock.app.SherlockActivity;
@@ -76,6 +77,20 @@ public class LogoList extends SherlockActivity {
         
         return true;
     }
+    
+    @Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		Intent intent;
+		
+	    switch (item.getItemId()) {
+	        case R.id.menuAbout:
+	        	intent = new Intent(this, AboutActivity.class);
+	            startActivity(intent);
+	            return true;
+	        default:
+	            return super.onOptionsItemSelected(item);
+	    }
+	}
     
     public void updateScore() {
     	if(menuScore != null) {

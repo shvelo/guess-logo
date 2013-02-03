@@ -2,23 +2,30 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
-        android:title="Score: 0"
         android:id="@+id/menuScore"
         android:enabled="true"
-        android:showAsAction="always|withText">
+        android:showAsAction="always|withText"
+        android:title="Score: 0">
     </item>
     <item
-        android:title="Guessed: 0/0"
         android:id="@+id/menuGuessed"
         android:enabled="false"
         android:showAsAction="always|withText"
+        android:title="Guessed: 0/0"
         android:visible="false">
     </item>
     <item
         android:id="@+id/menuRestart"
         android:enabled="true"
-        android:title="@string/restart"
         android:showAsAction="always|withText"
+        android:title="@string/restart"
+        android:visible="true">
+    </item>
+    <item
+        android:id="@+id/menuAbout"
+        android:enabled="true"
+        android:showAsAction="never"
+        android:title="@string/aboutLabel"
         android:visible="true">
     </item>
 

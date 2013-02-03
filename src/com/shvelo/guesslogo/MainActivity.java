@@ -178,10 +178,16 @@ public class MainActivity extends SherlockActivity {
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
+		Intent intent;
+		
 	    switch (item.getItemId()) {
 	        case android.R.id.home:
-	            Intent intent = new Intent(this, LogoList.class);
+	            intent = new Intent(this, LogoList.class);
 	            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+	            startActivity(intent);
+	            return true;
+	        case R.id.menuAbout:
+	        	intent = new Intent(this, AboutActivity.class);
 	            startActivity(intent);
 	            return true;
 	        default:

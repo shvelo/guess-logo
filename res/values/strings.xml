@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <string name="app_name">Guess Logo</string>
@@ -14,5 +15,13 @@
     <string name="back">&lt; Back</string>
     <string name="logo">Logo</string>
     <string name="guessed">Guessed</string>
+    <string name="aboutLabel">About</string>
+    <string name="title_activity_about">About</string>
+    <string name="about">
+"By Nick Shvelidze.\n
+Source at https://github.com/shvelo/guess-logo\n
+Please note: All logos shown or represented in this application are protected by copyright and/or are trademarks of their respective corporations. This app, not anyone associated with it, claims any ownership (copyright or otherwise) of any logos used in this app. The logos are protected by copyright and/or trademark. The use of low res logo images in this app for use of identification qualifies as "Fair Use" under US copyright law.
+"
+    </string>
 
 </resources>
