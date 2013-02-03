@@ -18,6 +18,7 @@
         android:id="@+id/menuRestart"
         android:enabled="true"
         android:title="@string/restart"
+        android:showAsAction="always|withText"
         android:visible="true">
     </item>
 
