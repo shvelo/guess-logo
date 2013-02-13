@@ -39,7 +39,7 @@ public class DBHelper extends SQLiteOpenHelper {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
 		this.context = context;
 		
-		database = getReadableDatabase();
+		database = getWritableDatabase();
 		if(checkJSON()) {
 			update(database, null, null);
 		}
@@ -85,15 +85,22 @@ public class DBHelper extends SQLiteOpenHelper {
 			MessageDigest md = MessageDigest.getInstance("MD5");
 			inputStream = context.getAssets().open("brands.json");
 			is = new DigestInputStream(inputStream, md);
-			String digest = new String(md.digest());
+			String digest = new String(md.digest(),"UTF-8");
 			is.close();
 			
 			Cursor cursor = database.rawQuery("SELECT value FROM userdata WHERE name='json_checksum'", null);
 			cursor.moveToFirst();
 			
-			if(digest == cursor.getString(0)) {
+			String storedDigest = cursor.getString(0);
+			
+			Log.d("guesslogo","Digest: "+digest);
+			Log.d("guesslogo","Stored digest: "+storedDigest);
+			
+			if(digest == storedDigest) {
 				return false;
 			} else {
+				Log.d("guesslogo", "Updating stored digest "+digest);
+				database.rawQuery("UPDATE userdata SET value='"+digest+"' WHERE name='json_checksum'", null);
 				return true;
 			}
 		} catch (Exception e) {
@@ -116,11 +123,17 @@ public class DBHelper extends SQLiteOpenHelper {
 		}
 		
 		int score = 0;
+		String checksum = "";
 		
 		if(oldVersion >= 4) {
 			Cursor cursor = db.rawQuery("SELECT value FROM userdata WHERE name='score'", null);
 			cursor.moveToFirst();
 			score = cursor.getInt(0);
+		}
+		if(oldVersion >= 5) {
+			Cursor cursor = db.rawQuery("SELECT value FROM userdata WHERE name='json_checksum'", null);
+			cursor.moveToFirst();
+			checksum = cursor.getString(0);
 		}
 		
 		execSQLFile("schema_drop.sql", db);
@@ -140,6 +153,9 @@ public class DBHelper extends SQLiteOpenHelper {
 				String.valueOf(score)
 			});
 		}
+		db.rawQuery("UPDATE userdata SET value=? WHERE name='json_checksum'", new String[]{
+			checksum
+		});
 		
 		db.setTransactionSuccessful();
 		db.endTransaction();
@@ -212,7 +228,7 @@ public class DBHelper extends SQLiteOpenHelper {
 				Log.d("guesslogo", lines[i]);
 				String statement = lines[i];
 				statement.replaceAll("[\\s\\n\\t ]","");
-				if(!statement.isEmpty())
+				if(statement.length() > 0)
 					db.execSQL(statement);
 			}
 		} catch (Exception e) {
